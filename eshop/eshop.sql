@@ -64,6 +64,7 @@ CREATE TABLE `produkt` (
 
 LOCK TABLES `produkt` WRITE;
 /*!40000 ALTER TABLE `produkt` DISABLE KEYS */;
+INSERT INTO `produkt` VALUES (1,1,'Protein 1','Toto je protein 1. Najsamlepsejsi na svete',100,'',2);
 /*!40000 ALTER TABLE `produkt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,11 +76,10 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `email` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +89,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'test','098f6bcd4621d373cade4e832627b4f6',1),(2,'janko','3bb984343e0469083fa53851f1ccbdb8',1);
+INSERT INTO `users` VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.sk'),('janko','1918a2e75d0db8247acb8b7f9d458c68','sf@ss'),('test','098f6bcd4621d373cade4e832627b4f6','test@test.sk');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-03 22:25:45
+-- Dump completed on 2023-05-17  9:19:23

@@ -1,6 +1,10 @@
 <?php 
 
 session_start();
+#if ($_SESSION['user_name'] == "admin") {
+ #                       header("Location: cms.php");
+ #               }
+
 
 
  ?>
@@ -51,7 +55,8 @@ https://templatemo.com/tm-546-sixteen-clothing
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-	<a class="navbar-brand" href="index.php"><h2>Oceľové <em>Svaly</em></h2></a>
+	<a class="navbar-brand" href="index.php"><h2>Oceľové <em>Svaly</em></h2><?php if (isset($_SESSION['user_name']))
+{ echo '<font color="green"> Ste prihlásený ako používateľ '.$_SESSION['user_name'];}?></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -63,22 +68,34 @@ https://templatemo.com/tm-546-sixteen-clothing
                 </a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="products.html">Naše produkty</a>
+                <a class="nav-link" href="products.php">Naše produkty</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">O nás</a>
+                <a class="nav-link" href="about.php">O nás</a>
               </li>
 
 	     <li class="nav-item">
-	     <a class="nav-link" <?php if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
+	     <a class="nav-link" <?php if (isset($_SESSION['user_name'])) {
 	     echo 'href="logout.php">Logout';}
 		else {
 			echo 'href="login.php">Login';}
 		?>
 		</a>
              </li>
+
+	<?php 
+	 if ($_SESSION['user_name'] == "admin") {
+
+	  echo '<li class="nav-item">';
+	  echo '<a class="nav-link" href="cms.php">CMS</a>';
+
+	  echo '</li>';
+
+	 }
+	    ?>
+
              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Kontaktujte nás</a>
+                <a class="nav-link" href="contact.php">Kontaktujte nás</a>
               </li>
             </ul>
           </div>
@@ -117,9 +134,8 @@ https://templatemo.com/tm-546-sixteen-clothing
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-	    <h2>Naposledy pridané produkty</h2><?php if (isset($_SESSION['id']) && isset($_SESSION['user_name']))
-{ echo '<h3><b><font color="green"> Ste prihlásený ako používateľ '.$_SESSION['user_name'];}?></b></h3>
-              <a href="products.html">pozrieť všetky produkty <i class="fa fa-angle-right"></i></a>
+	    <h2>Naposledy pridané produkty</h2>
+              <a href="products.php">pozrieť všetky produkty <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-4">
@@ -199,7 +215,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <li><a href="#">Corporis, omnis doloremque</a></li>
                 <li><a href="#">Non cum id reprehenderit</a></li>
               </ul>
-              <a href="about.html" class="filled-button">Čítať viac</a>
+              <a href="about.php" class="filled-button">Čítať viac</a>
             </div>
           </div>
           <div class="col-md-6">

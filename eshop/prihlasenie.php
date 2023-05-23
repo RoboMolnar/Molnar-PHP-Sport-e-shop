@@ -54,7 +54,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 $_SESSION['name'] = $row['name'];
 
                 $_SESSION['id'] = $row['id'];
-
+		mysqli_close($conn);
                 header("Location: index.php");
 
                 exit();

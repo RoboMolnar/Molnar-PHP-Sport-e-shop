@@ -100,12 +100,16 @@ a.filled-button:hover {
         background-image: url(../images/login_screen.jpg);
 }
 
+.cms-heading {
+        background-image: url(../images/cms.jpg);
+}
+
 .contact-heading {
 	background-image: url(../images/contact-us.jpg);
 }
 
 .page-heading {
-	padding: 210px 0px 130px 0px;
+	padding: 100px 0px 100px 0px;
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;

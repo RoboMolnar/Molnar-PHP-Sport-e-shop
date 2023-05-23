@@ -1,3 +1,11 @@
+<?php
+session_start();
+if ($_SESSION['user_name'] != "admin") {
+                        header("Location: index.php");
+                }
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Prihlásenie</title>
+    <title>CMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +52,8 @@ https://templatemo.com/tm-546-sixteen-clothing
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.php"><h2>Oceľové <em>Svaly</em></h2></a>
+          <a class="navbar-brand" href="index.php"><h2>Oceľové <em>Svaly</em></h2><?php if (isset($_SESSION['user_name']))
+{ echo '<font color="green"> Ste prihlásený ako používateľ '.$_SESSION['user_name'];}?></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -62,8 +71,15 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <a class="nav-link" href="about.php">O nás</a>
               </li>
 	      <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
-              </li>
+
+ 	<a class="nav-link" <?php if (isset($_SESSION['user_name'])) {
+             echo 'href="logout.php">Logout';}
+                else {
+                        echo 'href="login.php">Login';}
+                ?>
+                </a>
+             </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="contact.php">Kontaktujte nás</a>
               </li>
@@ -74,13 +90,13 @@ https://templatemo.com/tm-546-sixteen-clothing
     </header>
 
     <!-- Page Content -->
-    <div class="page-heading login-heading header-text">
+    <div class="page-heading cms-heading header-text">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="text-content">
-              <h4>Prihlásenie</h4>
-              <h2><font color="blue">Login</font></h2>
+              <h4>Manažment používateľov</h4>
+              <h2><font color="blue">CMS</font></h2>
             </div>
           </div>
         </div>
@@ -88,10 +104,10 @@ https://templatemo.com/tm-546-sixteen-clothing
     </div>
 
 
-<!-- sem pojde php kod na prihlasenie do DB -->
-     <form action="prihlasenie.php" method="post">
+<!-- sem pojde cms editacny kod -->
+     <form action="profile_update.php" method="post">
 	<br><br>
-        <h2><center>Prihláste sa na našu stránku</center></h2>
+        <h2><center>Editácia používateľov</center></h2>
 	<br>
 
         <?php if (isset($_GET['error'])) { ?>
@@ -101,20 +117,45 @@ https://templatemo.com/tm-546-sixteen-clothing
         <?php } ?>
 
 	<div  style ="text-align:center;">
-        <label><center>Meno</center></label>
+   meno*: <input type="text" name="name" ><br>
+ 
+   heslo*: <input type="text" name="pass"><br>
+ 
+   email*: <input type="email" name="email"><br>
+ 
+   Nový používateľ: <input type="checkbox" name="status" value="status"><br>
+   
+   Vymazať používateľa: <input type="checkbox" name="delete" value="delete"><br><br>
+   
+   <input type="submit" name="edit">
+   <br><br><br>
+   Zoznam používateľov:
 
-        <input type="text" name="uname" placeholder="Váš nick"><br>
+<?php
+ include "dbkonekt.php";
+ $sql = "SELECT user_name FROM users";
+$result = mysqli_query($conn, $sql);
+echo '<b>';
+foreach ($result as $row) {
+	#echo '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
+	echo implode('',$row).", ";
+}
 
-        <label><center>Heslo</center></label>
+mysqli_close($conn);
 
-        <input type="password" name="password" placeholder="Vaše heslo"><br>
 
-        <button type="submit">Login</button>
-	</div>
+?>
+
+
+</div>
 
      </form>
 
-<!-- sem pojde php kod na prihlasenie do DB -->
+
+
+
+
+<!-- sem pojde cms editacny kod -->
     
     <footer>
       <div class="container">
